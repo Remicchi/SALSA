@@ -10,10 +10,14 @@ import pytorch_lightning as pl
 import torch
 import torch.nn as nn
 
+import sys
+sys.path.insert(0, '/Users/ASUS/Desktop/FYP/SALSA-main')
 import models
-from dataset.database import Database
-from dataset.datamodule import SeldDataModule
-from models.seld_models import SeldModel
+sys.path.insert(0, '/Users/ASUS/Desktop/FYP/SALSA-main/dataset')
+from database import Database
+from datamodule import SeldDataModule
+sys.path.insert(0, '/Users/ASUS/Desktop/FYP/SALSA-main/models')
+from seld_models import SeldModel
 
 
 def build_database(cfg):
