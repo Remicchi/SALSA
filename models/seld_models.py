@@ -122,7 +122,7 @@ class SeldModel(BaseModel):
         self.lit_logger.info('Number of test files: {}'.format(len(pred_filenames)))
         # Compute validation metrics
         if self.is_eval:
-            ER, F1, LE, LR, seld_error = 0.0, 0.0, 0.0, 0.0, 0.0
+            ER, F1, LE, LR, seld_error = self.evaluate_output_prediction_csv(pred_filenames=pred_filenames)
         else:
             ER, F1, LE, LR, seld_error = self.evaluate_output_prediction_csv(pred_filenames=pred_filenames)
         # log metrics
