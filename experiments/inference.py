@@ -15,14 +15,14 @@ import re
 import pytorch_lightning as pl
 import torch
 
-from experiments.evaluate import evaluate_seld
+from evaluate import evaluate_seld
 from utilities.builder_utils import build_database, build_datamodule, build_model, build_task
 from utilities.experiments_utils import manage_experiments
 from utilities.learning_utils import MyLoggingCallback
 
 
-def inference(exp_config: str = './configs/seld.yml',
-              exp_group_dir: str = '/media/tho_nguyen/disk2/new_seld/dcase2021/outputs',
+def inference(exp_config: str = './experiments/configs/seld_salsa_lite.yml',
+              exp_group_dir: str = './outputs',
               exp_suffix: str = '_test',
               epoch: int = None,
               ckpt_type: str = 'best',
@@ -50,7 +50,7 @@ def inference(exp_config: str = './configs/seld.yml',
                      f.startswith('epoch') and f.endswith('ckpt')]
         assert len(ckpt_list) >= 1, 'No checkpoint found'
         if epoch is not None:
-            ckpt_list = [f for f in ckpt_list if int(f[6:9]) == epoch]
+            #ckpt_list = [f for f in ckpt_list if int(f[6:9]) == epoch]
             ckpt_name = ckpt_list[0]
         else:
             min_error = 1000
@@ -125,8 +125,8 @@ def inference(exp_config: str = './configs/seld.yml',
                   is_eval_split=inference_split=='eval')
 
 
-def inference_all_splits(exp_config: str = './configs/seld.yml',
-                         exp_group_dir: str = '/media/tho_nguyen/disk2/new_seld/dcase2021/outputs',
+def inference_all_splits(exp_config: str = './experiments/configs/seld_salsa_lite.yml',
+                         exp_group_dir: str = './outputs',
                          exp_suffix: str = '_test',
                          epoch: int = None,
                          ckpt_type: str = 'best',  # 'best' | 'checkpoint' (automatic select best model in 'best' or 'checkpoint')
@@ -141,7 +141,7 @@ def inference_all_splits(exp_config: str = './configs/seld.yml',
     :param ckpt_type: Type of checkpoint, can be 'best', 'checkpoint',
     :param submission_tag: tag name to submission file.
     """
-    splits = ['val', 'test', ]
+    splits = ['test', 'eval', ]
     for split in splits:
         inference(exp_config=exp_config,
                   exp_group_dir=exp_group_dir,

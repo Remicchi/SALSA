@@ -10,13 +10,15 @@ import torch
 from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.loggers import TensorBoardLogger
 
-from utilities.builder_utils import build_database, build_datamodule, build_model, build_task
-from utilities.experiments_utils import manage_experiments
-from utilities.learning_utils import LearningRateScheduler, MyLoggingCallback
+import sys
+sys.path.insert(0, '/Users/ASUS/Desktop/FYP/SALSA-main/utilities')
+from builder_utils import build_database, build_datamodule, build_model, build_task
+from experiments_utils import manage_experiments
+from learning_utils import LearningRateScheduler, MyLoggingCallback
 
 
-def train(exp_config: str = './configs/seld.yml',
-          exp_group_dir: str = '/media/tho_nguyen/disk2/new_seld/dcase2021/outputs',
+def train(exp_config: str = './experiments/configs/seld_salsa_lite.yml',
+          exp_group_dir: str = './outputs',
           exp_suffix: str = '_test',
           resume: bool = False):
     """
