@@ -3,7 +3,7 @@ import logging
 import pytorch_lightning as pl
 from torch.utils.data import DataLoader
 
-from dataset.dataloader import SeldDataset
+from dataloader import SeldDataset
 from utilities.transforms import ComposeTransformNp, CompositeCutout, RandomShiftUpDownNp, \
     ComposeMapTransform, TfmapRandomSwapChannelFoa, TfmapRandomSwapChannelMic, GccRandomSwapChannelMic
 
@@ -13,7 +13,7 @@ class SeldDataModule(pl.LightningDataModule):
     DataModule that group train and validation data for SELD task loader under on hood.
     """
     def __init__(self, feature_db, split_meta_dir: str = 'meta/dcase2021/original/', train_batch_size: int = 32,
-                 val_batch_size: int = 32, mode: str = 'crossval', inference_split: str = None,
+                 val_batch_size: int = 16, mode: str = 'crossval', inference_split: str = None,
                  feature_type: str = 'salsa', audio_format: str = None):
         super().__init__()
         self.feature_db = feature_db
@@ -139,18 +139,18 @@ class SeldDataModule(pl.LightningDataModule):
                           batch_size=self.train_batch_size,
                           shuffle=True,
                           pin_memory=True,
-                          num_workers=4)
+                          num_workers=0)
 
     def val_dataloader(self):
         return DataLoader(dataset=self.val_dataset,
                           batch_size=self.val_batch_size,
                           shuffle=False,
                           pin_memory=True,
-                          num_workers=4)
+                          num_workers=0)
 
     def test_dataloader(self):
         return DataLoader(dataset=self.test_dataset,
                           batch_size=self.test_batch_size,
                           shuffle=False,
                           pin_memory=True,
-                          num_workers=4)
+                          num_workers=0)

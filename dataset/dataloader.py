@@ -64,7 +64,7 @@ class SeldDataset(Dataset):
 
 if __name__ == '__main__':
     # test dataloader
-    db = Database(feature_root_dir='/data/seld_dcase2021/features/tfmap/mic/24000fs_512nfft_300nhop_5cond_4000fmaxdoa',
+    db = Database(feature_root_dir='features/salsa_lite/mic/24000fs_512nfft_300nhop_2000fmaxdoa',
                   audio_format='mic', output_format='reg_xyz')
     data_db = db.get_split(
         split='val', split_meta_dir='meta/dcase2021/original')
@@ -81,11 +81,11 @@ if __name__ == '__main__':
     print(sample[-1])
 
     # test data generator
-    batch_size = 8
+    batch_size = 1
     dataloader = torch.utils.data.DataLoader(dataset=dataset,
                                              batch_size=batch_size,
                                              shuffle=False,
-                                             num_workers=4)
+                                             num_workers=0)
     print('Number of batches: {}'.format(len(dataloader)))  # steps_per_epoch
     for train_iter, (X, sed_labels, doa_labels, filenames) in enumerate(dataloader):
         if train_iter == 0:

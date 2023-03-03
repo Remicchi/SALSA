@@ -19,9 +19,9 @@ class Database:
     Database class to handle one input streams for SELD
     """
     def __init__(self,
-                 feature_root_dir: str = '/data/seld_dcase2021/features/tfmap/foa/'
+                 feature_root_dir: str = './features/salsa_lite/mic/'
                                          '24000fs_512nfft_300nhop_5cond_9000fmaxdoa',
-                 gt_meta_root_dir: str = '/media/tho_nguyen/disk1/audio_datasets/dcase2021/task3',
+                 gt_meta_root_dir: str = './data',
                  audio_format: str = 'foa', n_classes: int = 12, fs: int = 24000,
                  n_fft: int = 1024, hop_len: int = 300, label_rate: float = 10, train_chunk_len_s: float = 8.0,
                  train_chunk_hop_len_s: float = 0.5, test_chunk_len_s: float = 4.0, test_chunk_hop_len_s: float = 2.0,

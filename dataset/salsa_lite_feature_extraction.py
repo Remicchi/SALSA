@@ -12,7 +12,7 @@ import yaml
 from timeit import default_timer as timer
 from tqdm import tqdm
 
-from dataset.salsa_feature_extraction import compute_scaler
+from salsa_feature_extraction import compute_scaler
 
 
 def extract_features(data_config: str = 'configs/tnsse2021_salsa_lite_feature_config.yml',
